@@ -64,7 +64,7 @@ export default {
     page: 1,
     itemsPerPage: 20,
     summoner: {
-      name: '',
+      name: '민 쯔'
     },
     items: [],
     singleSelect: false,
@@ -82,16 +82,16 @@ export default {
   mounted () {
   },
   methods: {
-    sleep(ms) {
-      return new Promise((r) => setTimeout(r, ms));
+    sleep (ms) {
+      return new Promise((r) => setTimeout(r, ms))
     },
-    searchFunc() {
+    searchFunc () {
       this.loading = true
       this.page = 1
       const that = this
       this.items = []
       api.searchSummoner(encodeURI(this.summoner.name)).then(res => {
-        this.summoner = {...res, name: that.summoner.name}
+        this.summoner = { ...res, name: that.summoner.name }
         this.getMatchList()
       }).catch(() => {
         this.loading = false
@@ -106,14 +106,14 @@ export default {
         this.sleep(1000).then(() => {
           if (res.length < 1) {
             this.loading = false
-            this.$store.commit('SNACKBAR', {text: '대전 기록이 없습니다.', color: 'red'})
+            this.$store.commit('SNACKBAR', { text: '대전 기록이 없습니다.', color: 'red' })
             return
           }
           res.forEach(matchId => {
             api.getMatchData(matchId).then(res2 => {
               const isWinner = res2.info.participants.find(v => v.puuid === puuid).win
               const timeAgo = this.timeCvt(res2.info.gameEndTimestamp)
-              //push into items
+              // push into items
               this.items.push({
                 ...res2.metadata,
                 ...res2.info,
@@ -123,9 +123,9 @@ export default {
             }).catch(() => {
               this.loading = false
             }).finally(() => {
-              if(this.items.length === this.itemsPerPage) {
+              if (this.items.length === this.itemsPerPage) {
                 this.loading = false
-                this.items.sort((a,b) => b.gameEndTimestamp - a.gameEndTimestamp)
+                this.items.sort((a, b) => b.gameEndTimestamp - a.gameEndTimestamp)
               }
             })
           })
@@ -135,34 +135,34 @@ export default {
       })
     },
     // https://stackoverflow.com/questions/47253206/convert-milliseconds-to-timestamp-time-ago-59m-5d-3m-etc-in-javascript
-    timeCvt(millsec) {
+    timeCvt (millsec) {
       const periods = {
         month: 30 * 24 * 60 * 60 * 1000,
         week: 7 * 24 * 60 * 60 * 1000,
         day: 24 * 60 * 60 * 1000,
         hour: 60 * 60 * 1000,
         minute: 60 * 1000
-      };
+      }
 
-      const diff = Date.now() - millsec;
+      const diff = Date.now() - millsec
       if (diff > periods.month) {
         // it was at least a month ago
-        return Math.floor(diff / periods.month) + "달 전";
+        return Math.floor(diff / periods.month) + '달 전'
       } else if (diff > periods.week) {
-        return Math.floor(diff / periods.week) + "주 전";
+        return Math.floor(diff / periods.week) + '주 전'
       } else if (diff > periods.day) {
-        return Math.floor(diff / periods.day) + "일 전";
+        return Math.floor(diff / periods.day) + '일 전'
       } else if (diff > periods.hour) {
-        return Math.floor(diff / periods.hour) + "시간 전";
+        return Math.floor(diff / periods.hour) + '시간 전'
       } else if (diff > periods.minute) {
-        return Math.floor(diff / periods.minute) + "분 전";
+        return Math.floor(diff / periods.minute) + '분 전'
       }
-      return "방금 전";
+      return '방금 전'
     }
   },
   computed: {
   },
   watch: {
-  },
+  }
 }
 </script>

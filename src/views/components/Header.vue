@@ -26,20 +26,20 @@
 
 export default {
   data: () => ({
-    menus: [{id: 1, route: 'home', name: 'LCK 일정'}, {id: 2, route: 'summoner', name: '소환사 검색'}],
+    menus: [{ id: 1, route: 'home', name: 'LCK 일정' }, { id: 2, route: 'summoner', name: '소환사 검색' }],
     title: 'JINDULE'
   }),
   computed: {
     // 로그인 여부에 따라 탭 변경
     authTab () {
-      return this.$store.getters.isAuth ? {id: 3, route: 'logout', name: '로그아웃'} : {id: 3, route: 'login', name: '로그인'}
+      return this.$store.getters.isAuth ? { id: 3, route: 'logout', name: '로그아웃' } : { id: 3, route: 'login', name: '로그인' }
     },
     loggedMenus () {
       return [...this.menus, this.authTab]
     }
   },
   methods: {
-    movePage() {
+    movePage () {
 
     }
   }

@@ -124,14 +124,14 @@ export default {
       month: 'Month',
       week: 'Week',
       day: 'Day',
-      '4day': '4 Days',
+      '4day': '4 Days'
     },
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
     events: [],
     colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party']
   }),
   mounted () {
     this.$refs.calendar.checkChange()
@@ -170,11 +170,11 @@ export default {
       }
       nativeEvent.stopPropagation()
     },
-    calendarApi() {
+    calendarApi () {
       api.calendar().then(res => {
         this.events = res
       })
     }
-  },
+  }
 }
 </script>

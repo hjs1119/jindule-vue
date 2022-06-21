@@ -44,10 +44,10 @@ export default {
   name: 'Login',
   data: () => ({
     userInfo: {
-      id: '',
-      pwd: ''
+      id: 'jindule',
+      pwd: '0000'
     },
-    valid: false,
+    valid: false
   }),
   methods: {
     login () {
